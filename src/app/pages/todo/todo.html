@@ -1,0 +1,13 @@
+<div class="border-b border-gray-300 p-2 text-sm mb-4">
+    Messages: {{message()[0]}}
+</div>
+<h1 class="text-5xl font-bold mb-4">
+    Todo List
+</h1>
+
+
+<mat-selection-list #todos>
+    @for (todo of todoList(); track $index) {
+    <mat-list-option>{{todo.title}}</mat-list-option>
+    }
+</mat-selection-list>
