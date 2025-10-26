@@ -1,0 +1,17 @@
+<div class="border rounded-lg shadow border-gray-300">
+   
+    <div class="p-4">
+        @if(isActive()){
+            <div class="bg-green-500 p-1 text-xs rounded-full w-fit px-2">Is Active</div>
+        }
+        {{isActive()}}
+        <div class="border-b border-gray-300 mb-4 py-2">
+             <ng-content select="h1,h2,h3,h4,h5,h6"></ng-content>
+        </div>
+        <ng-content></ng-content>
+    </div>
+
+    <footer class="border-t border-gray-300 p-2" #f>
+        <ng-content select=".footer"></ng-content>
+    </footer>
+</div>
