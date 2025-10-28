@@ -5,7 +5,12 @@ import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
-        path: '',
+        path:'',
+        pathMatch:'full',
+        redirectTo:'todo/todos'
+    },
+    {
+        path: 'todo',
         component: MasterLayoutComponent,
         loadChildren: () => import('./pages/pages.routes').then(c => c.pageRoutes),
         canActivate:[authGuard]

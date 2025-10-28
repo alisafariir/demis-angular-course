@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
 
 export const pageRoutes: Routes = [
+    
     {
-        path: '',
+        path: 'todos',
         loadComponent: () => import('./todo/todo').then(c => c.TodoComponent)
     },
     {
-        path:'test',    
-        loadComponent: () => import('./test/test').then(c => c.TestComponent)
+        path:'todos/:id',    
+        loadComponent: () => import('./todo-item/todo-item').then(c => c.TodoItemComponent)
     }
 ];

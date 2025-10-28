@@ -8,6 +8,7 @@ import {
     MatSnackBarLabel,
     MatSnackBarRef,
 } from '@angular/material/snack-bar';
+import { Todo } from '../../types/todo.interface';
 @Component({
     selector: 'app-todo',
     templateUrl: './todo.html',
@@ -18,7 +19,7 @@ import {
 export class TodoComponent {
     message = signal<string[]>([])
     todoService = inject(TodoService)
-    todoList = signal<any[]>([])
+    todoList = signal<Todo[]>([])
     private _snackBar = inject(MatSnackBar);
 
     constructor() {

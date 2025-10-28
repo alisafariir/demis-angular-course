@@ -1,0 +1,7 @@
+<h1>{{todoItem().title}}</h1>
+@if (todoItem().completed) {
+    <div class="p-2 bg-green-500 text-green-50">Completed</div>
+} @else {
+    <div class="p-2 bg-red-500 text-red-50">Unfinished</div>
+
+}
