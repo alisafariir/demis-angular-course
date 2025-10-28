@@ -1,0 +1,44 @@
+<h2 class="mb-4 text-center">Login</h2>
+
+<form [formGroup]="form" class="flex flex-col gap-4" (ngSubmit)="onSubmit()">
+    <!-- Email -->
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
+
+      @if (email?.hasError('required')) {
+        <mat-error>Email is required</mat-error>
+      } @else if (email?.hasError('email')) {
+        <mat-error>Invalid email format</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Password -->
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [type]="hidePassword() ? 'password' : 'text'"
+        formControlName="password"
+      />
+      <button mat-icon-button matSuffix type="button" (click)="togglePassword()">
+        <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+
+      @if (password?.hasError('required')) {
+        <mat-error>Password is required</mat-error>
+      } @else if (password?.hasError('minlength')) {
+        <mat-error>At least 6 characters are required</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Submit -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="full-width"
+    >
+      Sign In
+    </button>
+  </form>
