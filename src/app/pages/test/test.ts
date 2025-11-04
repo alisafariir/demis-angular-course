@@ -1,25 +1,50 @@
-import { AfterViewInit, Component, OnInit, viewChild } from '@angular/core';
-import { CardComponent } from "../../components/card/card";
+import {
+  AfterViewInit,
+  Component,
+  computed,
+  effect,
+  inject,
+  linkedSignal,
+  OnInit,
+  Signal,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { CardComponent } from '../../components/card/card';
+import { TestService } from './test.service';
 
 @Component({
-    selector: 'app-test',
-    templateUrl: './test.html',
-    imports: [CardComponent],
+  selector: 'app-test',
+  templateUrl: './test.html',
 })
-export class TestComponent implements OnInit, AfterViewInit {
-    card = viewChild<CardComponent>('card');
-    constructor() { 
-        
-    }
+export class TestComponent implements AfterViewInit {
+  products = signal<any[]>([]);
 
-    ngOnInit(): void { 
-        console.log("🔃 isActive onInit: ", this.card()?.isActive());
+  testService = inject(TestService);
 
-    }
-    ngAfterViewInit(): void {
-        //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-        //Add 'implements AfterViewInit' to the class.
-        console.log("✅ isActive afterViewInit: ", this.card()?.isActive());
-        
-    }
+  limit = signal(10);
+  skip = signal(0);
+  total = signal(0);
+
+  ngAfterViewInit(): void {
+    this.loadProducts();
+  }
+
+  effect = effect(() => {
+    console.log(this.products());
+  });
+
+  loadProducts() {
+    this.testService.getProducts(this.limit(), this.skip()).subscribe({
+      next: (response: any) => {
+        this.total.set(response.total);
+        this.products.update((oldValues) => [...oldValues, ...response.products]);
+      },
+    });
+  }
+
+  handleLoadMore() {
+    this.skip.update((skip) => skip + this.limit());
+    this.loadProducts();
+  }
 }

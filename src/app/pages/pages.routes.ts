@@ -9,4 +9,8 @@ export const pageRoutes: Routes = [
     path: 'todos/:todoId',
     loadComponent: () => import('./todo/todo-item/todo-item').then((c) => c.TodoItemComponent),
   },
+  {
+    path: 'test',
+    loadComponent: () => import('./test/test').then((c) => c.TestComponent),
+  },
 ];
