@@ -16,6 +16,7 @@ import { TestService } from './test.service';
 @Component({
   selector: 'app-test',
   templateUrl: './test.html',
+  styleUrl: './test.css',
 })
 export class TestComponent implements AfterViewInit {
   products = signal<any[]>([]);
@@ -25,6 +26,12 @@ export class TestComponent implements AfterViewInit {
   limit = signal(10);
   skip = signal(0);
   total = signal(0);
+
+  isShown = signal(false);
+
+  toggle() {
+    this.isShown.update((isShown) => !isShown);
+  }
 
   ngAfterViewInit(): void {
     this.loadProducts();
